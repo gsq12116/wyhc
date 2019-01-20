@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
-from web.app.views import blue
+from web.app.models import Good, db
 from web.setting import DATABASES
 
 
@@ -21,13 +21,21 @@ app.config['SQLALCHEMY_DATABASE_URI'] = '{}+{}://{}:{}@{}:{}/{}'.format(default_
                                                                         default_database['NAME'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# 蓝图绑定
-app.register_blueprint(blueprint=blue, url_prefix='/goods')
+db.init_app(app)
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/info/')
+def info():
+    goods_info = []
+    goods = Good.query.all()
+    for good in goods:
+        goods_info.append(good.to_dict())
+    return jsonify(goods_info=goods_info)
 
 
 if __name__ == '__main__':

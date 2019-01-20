@@ -2,7 +2,7 @@ DATABASES = {
         'default': {
             'DRIVER': 'mysql',
             'DH': 'pymysql',
-            'NAME': 'ihome',
+            'NAME': 'spider',
             'USER': 'root',
             'PASSWORD': '',
             'HOST': 'localhost',
