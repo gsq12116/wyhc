@@ -16,6 +16,9 @@ def get_page(url):
     browser.get(url)
     time_out = random.randint(1, 3)
     time.sleep(time_out)
+    for i in range(8):
+        browser.execute_script('window.scrollTo(0, document.body.scrollHeight*'+ str(i+1) +'/8)')
+        time.sleep(time_out/2)
     page_source = browser.page_source
     return page_source
 
