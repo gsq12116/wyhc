@@ -1,4 +1,5 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
+from flask_paginate import get_page_parameter, Pagination
 
 from web.app.models import Good, db
 from web.setting import DATABASES
@@ -26,16 +27,13 @@ db.init_app(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
-
-
-@app.route('/info/')
-def info():
     goods_info = []
     goods = Good.query.all()
     for good in goods:
         goods_info.append(good.to_dict())
-    return jsonify(goods_info=goods_info)
+    return render_template('index.html',
+                           goods=goods_info
+                           )
 
 
 if __name__ == '__main__':

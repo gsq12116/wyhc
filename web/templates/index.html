@@ -6,6 +6,27 @@
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
 </head>
 <body>
-    sssssssssssss
+    <table>
+      <thead>
+        <tr>
+          <th>order</th>
+          <th>itemId</th>
+          <th>title</th>
+          <th>price</th>
+          <th>shop</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for good in goods %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ good.itemId }}</td>
+            <td>{{ good.title }}</td>
+            <td>{{ good.price }}</td>
+            <td>{{ good.shop }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 </body>
 </html>
